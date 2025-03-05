@@ -57,7 +57,7 @@ void setup() {
     d.y = random(border, height-border); //set a random y with some padding
     d.rotation = random(0, 360); //random rotation between 0 and 360
     int j = (int)random(20);
-    d.z = ((j%10)+1)*inchToPix(.5f); //increasing size from .5 up to 3.0" 
+    d.z = ((j%5)+1)*inchToPix(.5f); //increasing size from .5 up to 5.0" 
     destinations.add(d);
     println("created target with " + d.x + "," + d.y + "," + d.rotation + "," + d.z);
   }
