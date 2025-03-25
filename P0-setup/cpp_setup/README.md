@@ -94,4 +94,22 @@ A successful compilation will look similar to the image below, but the bunny sho
 <!--
 Point submodule to a commit (tag) 
 https://stackoverflow.com/questions/1777854/how-can-i-specify-a-branch-tag-when-adding-a-git-submodule
+
+1) add submodule:
+
+git submodule add <URL> <path>
+example: git submodule add https://github.com/libigl/libigl.git ./dependencies/libigl
+
+
+2) from the submodule directory, checkout the tag/commit we should track. Note it is not encoded explicitly but apparently is tracked by the main project's git config. I haven't tested if this is true.
+
+cd <submodule_directory>
+git checkout tags/<tagname> -b <tagname>-branch
+
+example: 
+cd ./dependencies/libigl
+git checkout tags/v2.3.0 -b v2.3.0-branch
+
+
+This switches to the tag commit and creates a new branch of that commit
 -->
