@@ -74,6 +74,8 @@ namespace mesh_intro {
             *  (2) scale mesh
             */
 
+            ImGui::InputDouble("scale factor", &scale_factor);
+
             if (ImGui::Button("scale mesh"))
             {
                 scale_mesh();
