@@ -175,3 +175,5 @@ cython_debug/
 
 test.ipynb
 barplot_data.json
+logs/
+temp/

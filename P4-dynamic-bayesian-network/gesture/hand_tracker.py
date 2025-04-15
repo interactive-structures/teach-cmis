@@ -205,7 +205,7 @@ class HandTracker:
         # Detect index up gesture with cooldown
         if is_index_up and time.time() - self.last_index_up_time > self.index_up_cooldown:
             self.last_index_up_time = time.time()
-            self._trigger_gesture("tap")
+            self._trigger_gesture("press down")
         
         # Toggle pinch state if distance crosses threshold
         prev_pinch_state = self.is_pinched
@@ -238,15 +238,15 @@ class HandTracker:
                     if abs(dx) > abs(dy):
                         # Horizontal movement is primary
                         if dx > 0:
-                            self._trigger_gesture("drag_right")
+                            self._trigger_gesture("slide right")
                         else:
-                            self._trigger_gesture("drag_left")
+                            self._trigger_gesture("slide left")
                     else:
                         # Vertical movement is primary
                         if dy > 0:
-                            self._trigger_gesture("drag_down")
+                            self._trigger_gesture("slide down")
                         else:
-                            self._trigger_gesture("drag_up")
+                            self._trigger_gesture("slide up")
         
         # Store current positions for next frame
         self.prev_finger_positions = finger_positions
@@ -260,9 +260,9 @@ class HandTracker:
             # Call the callback if registered
             if self.callback:
                 self.callback(gesture)
-            else:
-                # Only print if no callback is registered
-                print(f"Gesture detected: {gesture}")
+            # else:
+            #     # Only print if no callback is registered
+            #     print(f"Gesture detected: {gesture}")
                 
     def get_last_gesture(self):
         """Get the last detected gesture."""

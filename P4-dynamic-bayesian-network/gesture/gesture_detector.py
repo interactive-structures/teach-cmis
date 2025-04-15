@@ -38,11 +38,11 @@ class GestureDetector:
         
         # Colors for gesture visualization
         self.colors = {
-            "drag_up": (0, 255, 0),      # Green
-            "drag_down": (255, 0, 0),     # Red
-            "drag_left": (255, 165, 0),   # Orange
-            "drag_right": (0, 0, 255),    # Blue
-            "tap": (255, 255, 0),         # Yellow
+            "slide up": (0, 255, 0),      # Green
+            "slide down": (255, 0, 0),     # Red
+            "slide left": (255, 165, 0),   # Orange
+            "slide right": (0, 0, 255),    # Blue
+            "press down": (255, 255, 0),         # Yellow
         }
         
         # Initialize fonts
@@ -74,8 +74,8 @@ class GestureDetector:
         self.current_gesture = gesture
         self.gesture_display_time = pygame.time.get_ticks() / 1000.0  # Current time in seconds
             
-        # # Handle tap gesture for selecting an object
-        # if gesture == "tap":
+        # # Handle press down gesture for selecting an object
+        # if gesture == "press down":
         #     # Get currently hovered shape
         #     hovered_shape = self.shape_manager.get_hovered_shape()
         #     if hovered_shape:
@@ -88,7 +88,7 @@ class GestureDetector:
         #             self.status_text = f"Selected shape {self.selected_shape_id}"
         #             print(f"Selected shape {self.selected_shape_id}")
         #     else:
-        #         # Deselect if tapping on empty space
+        #         # Deselect if press downping on empty space
         #         self.selected_shape_id = None
         #         self.status_text = "No shape selected"
             
@@ -98,16 +98,16 @@ class GestureDetector:
         #         # Move the selected shape
         #         shape = self.shape_manager.get_shape(self.selected_shape_id)
         #         if shape:
-        #             if gesture == "drag_up":
+        #             if gesture == "slide up":
         #                 shape.y -= self.move_speed
         #                 self.status_text = f"Moving shape {self.selected_shape_id} up"
-        #             elif gesture == "drag_down":
+        #             elif gesture == "slide down":
         #                 shape.y += self.move_speed
         #                 self.status_text = f"Moving shape {self.selected_shape_id} down"
-        #             elif gesture == "drag_left":
+        #             elif gesture == "slide left":
         #                 shape.x -= self.move_speed
         #                 self.status_text = f"Moving shape {self.selected_shape_id} left"
-        #             elif gesture == "drag_right":
+        #             elif gesture == "slide right":
         #                 shape.x += self.move_speed
         #                 self.status_text = f"Moving shape {self.selected_shape_id} right"
         #     else:
@@ -212,7 +212,7 @@ class GestureDetector:
         alpha_factor = max(0, 1 - time_displayed / self.gesture_display_duration)
         
         # Draw different visualizations based on the gesture
-        if self.current_gesture == "drag_up":
+        if self.current_gesture == "slide up":
             # Draw up arrow
             points = [
                 (center_x, center_y - indicator_size // 2),  # Top
@@ -222,7 +222,7 @@ class GestureDetector:
             ]
             pygame.draw.polygon(surface, color, points)
             
-        elif self.current_gesture == "drag_down":
+        elif self.current_gesture == "slide down":
             # Draw down arrow
             points = [
                 (center_x, center_y + indicator_size // 2),  # Bottom
@@ -232,7 +232,7 @@ class GestureDetector:
             ]
             pygame.draw.polygon(surface, color, points)
             
-        elif self.current_gesture == "drag_left":
+        elif self.current_gesture == "slide left":
             # Draw left arrow
             points = [
                 (center_x - indicator_size // 2, center_y),  # Left
@@ -242,7 +242,7 @@ class GestureDetector:
             ]
             pygame.draw.polygon(surface, color, points)
             
-        elif self.current_gesture == "drag_right":
+        elif self.current_gesture == "slide right":
             # Draw right arrow
             points = [
                 (center_x + indicator_size // 2, center_y),  # Right
@@ -252,8 +252,8 @@ class GestureDetector:
             ]
             pygame.draw.polygon(surface, color, points)
             
-        elif self.current_gesture == "tap":
-            # Draw tap visualization (tap)
+        elif self.current_gesture == "press down":
+            # Draw press down visualization (press down)
             radius = indicator_size // 3
             pygame.draw.circle(surface, color, (center_x, center_y), radius, 0)
             # Draw a ripple effect

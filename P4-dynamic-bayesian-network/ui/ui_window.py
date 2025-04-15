@@ -5,9 +5,9 @@ import os
 # Add the parent directory to sys.path to find the gesture module
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from shape_manager import ShapeManager
-from bar_plot import BarPlot, BarPlotManager
-from data_simulator import DataSimulator
+from ui.shape_manager import ShapeManager
+from ui.bar_plot import BarPlot, BarPlotManager
+from ui.data_simulator import DataSimulator
 from gesture.gesture_detector import GestureDetector
 from gesture.hand_tracker import HandTracker
 
@@ -46,6 +46,9 @@ class UIWindow:
         
         # Initialize gesture detection
         self.init_gesture_detection()
+        
+        # Custom update callbacks
+        self.update_callbacks = []
     
     def setup_bar_plot(self):
         """Set up the bar plot and data simulator."""
@@ -173,6 +176,10 @@ class UIWindow:
         for renderer in self.external_renderers:
             if hasattr(renderer, 'update'):
                 renderer.update()
+                
+        # Call custom update callbacks
+        for callback in self.update_callbacks:
+            callback(self)
     
     def _render(self):
         """Render the UI."""
@@ -270,6 +277,19 @@ class UIWindow:
     def quit(self):
         """Properly quit pygame and clean up resources."""
         self.running = False
+
+    def add_update_callback(self, callback):
+        """Add a custom update callback function.
+        
+        The callback will be called during each update cycle with the UIWindow instance.
+        """
+        if callback not in self.update_callbacks:
+            self.update_callbacks.append(callback)
+
+    def remove_update_callback(self, callback):
+        """Remove a previously added update callback."""
+        if callback in self.update_callbacks:
+            self.update_callbacks.remove(callback)
 
 # Main execution block
 if __name__ == "__main__":
