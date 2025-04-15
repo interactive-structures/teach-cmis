@@ -6,7 +6,7 @@ import numpy as np
 from world_space.curr_world_space import interactions
 from ui.bar_plot import BarPlot, BarPlotManager
 
-
+## disregard 
 # Create a simplified UI window without the default plot
 class DBNUIWindow(UIWindow):
     def __init__(self, width=800, height=600, title="CMIS DBN Demo"):
@@ -40,10 +40,10 @@ window.add_update_callback(track_inputs)
 
 # Create our own bar plot for intentions
 intentions_plot = BarPlot(
-    x=100, 
-    y=300,
-    width=600, 
-    height=250,
+    x=50,  # Move it more to the left
+    y=300,  # Position it higher
+    width=700,  # Make it wider to allow more space for labels
+    height=200,  # Make it taller
     max_value=1.0,
     num_bars=len(interactions),
     bar_labels=interactions  # Use the interaction labels from world space

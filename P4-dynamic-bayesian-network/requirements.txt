@@ -1,5 +1,6 @@
 pygame==2.6.1
 opencv-python==4.11.0.86
 mediapipe==0.10.21 
-pyagrum
+pyagrum==1.15.1
 ipywidgets
+pandas==2.2.3

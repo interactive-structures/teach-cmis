@@ -69,9 +69,9 @@ class BarPlot:
         self.plot_width = self.width - 2 * self.padding
         self.plot_height = self.height - 2 * self.padding
         
-        # Calculate individual bar width
-        self.bar_width = self.plot_width / (self.num_bars * 2)  # Leave space between bars
-        self.bar_spacing = self.bar_width / 2
+        # Calculate individual bar width - use smaller width and larger spacing
+        self.bar_width = self.plot_width / (self.num_bars * 3)  # Give 2/3 of space to spacing
+        self.bar_spacing = self.bar_width * 2  # Twice as much space between bars
     
     def update_values(self, values):
         """Update the values for all bars.
@@ -174,13 +174,19 @@ class BarPlot:
             value_rect = value_surf.get_rect(centerx=bar_x + self.bar_width/2, bottom=bar_y - 5)
             surface.blit(value_surf, value_rect)
             
-            # Draw label below the bar
+            # Draw label below the bar at an angle
             label_surf = self.font.render(self.bar_labels[i], True, self.text_color)
-            label_rect = label_surf.get_rect(
-                centerx=bar_x + self.bar_width/2, 
+            
+            # Create a new rotated surface for the label (30 degrees)
+            angle = 30
+            rotated_label = pygame.transform.rotate(label_surf, angle)
+            
+            # Position the rotated label
+            label_rect = rotated_label.get_rect(
+                centerx=bar_x + self.bar_width/2,
                 top=self.y + self.height - self.padding + 5
             )
-            surface.blit(label_surf, label_rect)
+            surface.blit(rotated_label, label_rect)
 
 
 class BarPlotManager:
